@@ -16,23 +16,74 @@ We're going to create an Object Oriented Cash Register that can:
 
 ## Instructions
 
-**This is a test-driven lab!** You will need to read the `register_test.py` file and the test output very carefully to solve this one.
+The `CashRegister` class is a blueprint that models attributes (adjectives) and methods (verbs) of an actual register.
 
-**Hint #1:** Keep in mind that to call an instance method *inside* another instance method, we use the `self` keyword to refer to the instance on which we are operating. For example:
+### Adding Items
+Items should be able to be added with their title, price and an option quantity using the `add_item` method
 
+The register should keep track of which items have been purchased and keep a running total of the purchases.
 ```python
-class Person:
-  def __init__(self,age):
-    self.age = 0
-  def birthday(self):
-    self.age += 1
+>>>cash_register.add_item("eggs", 0.98)
+>>>cash_register.total
+.98
+>>>cash_register.items
+["eggs"]
+>>>cash_register.add_item("magazine", 5.00, 3)
+>>>cash_register.total
+15.98
+>>>cash_register.items
+["eggs", "magazine", "magazine", "magazine"]
 ```
 
-Follow along with the tests in `register_test.py`. By completing one test at a time, you'll end up with a relatively complex class at the end.
+### Discounts
+Each time a new register is initialized, a discount can be added. This discount does not affect the total until the class method apply_discount is called.
 
-Take it one step at a time!
+In addition, the `apply_discount` method should return a message: `"After the discount, the total comes to $TOTAL."` where TOTAL is the current total for any added items.
 
-**Hint #2:** The `void_last_transaction` method will remove the last transaction from the total. You'll need to make an addition attribute and keep track of that last transaction amount somehow. In what method of the class are you working with an individual item?
+If there is no discount for the current register, the returned message should be `"There is no discount to apply".`
+
+```python
+>>>cash_register2=CashRegister(20)
+>>>cash_register2.add_item("chicken", 10)
+>>>cash_register2.apply_discount()
+"After the discount, the total comes to $8.00."
+>>>cash_register2.total
+8
+
+```
+
+### Void the Last Transaction
+
+The `void_last_transaction` method will remove the last transaction from the total. You'll need to make an additional attribute and keep track of the number of recent items added to a list and one to keep track of their value.
+
+Make sure your method can handle instances where the last transaction could include a quantity of 1 or greater.
+
+```python
+>>>cash_register.add_item("chicken", 10)
+>>>cash_register.add_item("tomato", 1.76, 2)
+>>>cash_register.items
+["chicken", "tomato", "tomato"]
+>>>cash_register.void_last_transaction()
+>>>cash_register.total
+10
+>>>cash_register.items
+["chicken"]
+```
+
+**This is a test-driven lab!** Follow along with the tests in `register_test.py`. By completing one test at a time, you'll end up with a relatively complex class at the end.
+
+You can always run `python register_test.py` from the command line to clue you into your next step.
+
+For example, if we run it without creating any code, we'll see that we first need to define  class called `CashRegister`
+```python
+>>>python register_test.py
+Traceback (most recent call last):
+  File "register_test.py", line 4, in <module>
+    from register import CashRegister
+ImportError: cannot import name CashRegister
+```
+All great developers, take their code one step at a time. Write one piece of functionality and make sure you get a new test to pass before moving on.
+
 
 ## Resources
 * [String Formatting](https://mkaz.tech/python-string-format.html)
