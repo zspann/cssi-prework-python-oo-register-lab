@@ -16,7 +16,18 @@ We're going to create an Object Oriented Cash Register that can:
 
 ## Instructions
 
-The `CashRegister` class is a blueprint that models attributes (adjectives) and methods (verbs) of an actual register.
+The `CashRegister` class is a blueprint that models attributes (adjectives) and methods (verbs) of an actual register. We've written tests to help keep you on track (feel free to look at the `register_test` file) - make sure to read the messages when they're not passing!
+
+### The `CashRegister` class
+
+Start by building out your empty CashRegister class so that you can create individual instances. The CashRegister class accepts an optional argument for a percentage discount:
+
+```python
+cash_register = CashRegister() # instance of CashRegister with discount of 0.
+ten_percent_discount_cash_register = CashRegister(10)  # instance of CashRegister with discount of 10%.
+```
+Instances of CashRegister should also have a `total` attribute which keeps track of the total cost, and an `items` attribute (as a list) that keeps track of the items that have been added to the register.
+
 
 ### Adding Items
 Items should be able to be added with their title, price and an option quantity using the `add_item` method
