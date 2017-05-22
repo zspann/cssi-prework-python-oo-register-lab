@@ -41,7 +41,9 @@ class TestRegister(unittest.TestCase):
         """It applies the discount to the total price"""
         self.cash_register_with_discount.add_item("chicken", 10)
         self.cash_register_with_discount.apply_discount()
+        self.assertEqual(self.cash_register_with_discount.items, ["chicken"])
         self.assertEqual(self.cash_register_with_discount.total,8)
+
 
     def test_discount_message(self):
         """It returns success message with updated total"""
